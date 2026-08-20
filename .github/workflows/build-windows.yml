@@ -22,6 +22,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Fetch rcedit dependency
+        run: app/scripts/fetch_rcedit
+        shell: bash
+
       - name: Build JS source
         run: npm run build
         env:
@@ -30,6 +34,8 @@ jobs:
       - name: Build Windows directory version
         run: app/scripts/dir_build -p w
         shell: bash
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
 
       - name: Upload Staging Artifact
         uses: actions/upload-artifact@v4
